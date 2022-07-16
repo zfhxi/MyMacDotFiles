@@ -4,15 +4,10 @@
 		position=bottom \
 		padding_left=0 \
 		padding_right=0 \
-		#color=0xff3b4252 \
-		color=0x00000000 \
+		color=0x30000000 \
 		shadow=off \
 		topmost=off
 
-
-		# label.font="MesloLGS NF:Bold:12.0" \
-		# label.font="Rajdhani:Bold:16.0,Hack Nerd Font:Bold:16.0" \
-		# label.font="Rajdhani:Bold:16.0" \
 ############## GLOBAL DEFAULTS ##############
 	sketchybar -m --default \
 		updates=when_shown \
@@ -29,7 +24,7 @@
 		label.padding_left=5 \
 		label.padding_right=2 \
 		icon.padding_left=8 \
-		label.padding_right=8
+		label.padding_right=5
 
 
 ############## PRIMARY DISPLAY SPACES ##############
@@ -42,15 +37,13 @@
 		--set code label.padding_right=5 \
 		--set code label.padding_left=0 \
 		--set code label.color=0xffeceff4 \
-		--set code background.color=0xff57627A  \
+		--set code background.color=0x00000000  \
 		--set code background.height=21 \
 		--set code background.padding_left=12 \
 		--set code update_freq=1 \
 		--set code click_script="yabai -m space --focus 1" \
 		--set code script="~/.config/sketchybar/plugins/space.sh" \
         --subscribe code window_focus front_app_switched space_change title_change\
-		# --set code label="code" \
-		# --set code label.font="Rajdhani:Bold:16.0" \
 
 	# SPACE 2: WEB ICON
 	sketchybar -m --add space web left \
@@ -62,15 +55,13 @@
 		--set web label.padding_right=5 \
 		--set web label.padding_left=0 \
 		--set web label.color=0xffeceff4 \
-		--set web background.color=0xff57627A  \
+		--set web background.color=0x00000000  \
 		--set web background.height=21 \
 		--set web background.padding_left=7 \
 		--set web update_freq=1 \
 		--set web click_script="yabai -m space --focus 2" \
 		--set web script="~/.config/sketchybar/plugins/space.sh" \
         --subscribe web window_focus front_app_switched space_change title_change\
-		# --set web label="web" \
-		# --set web label.font="Rajdhani:Bold:16.0" \
 
 	# SPACE 3: research ICON
 	sketchybar -m --add space research left \
@@ -82,15 +73,13 @@
 		--set research label.padding_right=5 \
 		--set research label.padding_left=0 \
 		--set research label.color=0xffeceff4 \
-		--set research background.color=0xff57627A  \
+		--set research background.color=0x00000000  \
 		--set research background.height=21 \
 		--set research background.padding_left=7 \
 		--set research update_freq=1 \
 		--set research click_script="yabai -m space --focus 3" \
 		--set research script="~/.config/sketchybar/plugins/space.sh" \
         --subscribe research window_focus front_app_switched space_change title_change\
-		# --set research label="research" \
-		# --set research label.font="Rajdhani:Bold:16.0" \
 
 	# SPACE 4: CHAT ICON
 	sketchybar -m --add space office left \
@@ -102,15 +91,13 @@
 		--set office label.padding_right=5 \
 		--set office label.padding_left=0 \
 		--set office label.color=0xffeceff4 \
-		--set office background.color=0xff57627A  \
+		--set office background.color=0x00000000  \
 		--set office background.height=21 \
 		--set office background.padding_left=7 \
 		--set office update_freq=1 \
 		--set office click_script="yabai -m space --focus 4" \
 		--set office script="~/.config/sketchybar/plugins/space.sh" \
         --subscribe office window_focus front_app_switched space_change title_change\
-		# --set office label="office" \
-		# --set office label.font="Rajdhani:Bold:16.0" \
 
 	# SPACE 5: MUSIC ICON
 	sketchybar -m --add space enjoy left \
@@ -122,15 +109,13 @@
 		--set enjoy label.padding_right=5 \
 		--set enjoy label.padding_left=0 \
 		--set enjoy label.color=0xffeceff4 \
-		--set enjoy background.color=0xff57627A  \
+		--set enjoy background.color=0x00000000  \
 		--set enjoy background.height=21 \
 		--set enjoy background.padding_left=7 \
 		--set enjoy update_freq=1 \
 		--set enjoy click_script="yabai -m space --focus 5" \
 		--set enjoy script="~/.config/sketchybar/plugins/space.sh" \
         --subscribe enjoy window_focus front_app_switched space_change title_change\
-		# --set enjoy label="enjoy" \
-		# --set enjoy label.font="Rajdhani:Bold:16.0" \
 
 	# SPACE 6: OTHER ICON
 	sketchybar -m --add space more left \
@@ -142,7 +127,7 @@
 		--set more label.padding_right=5 \
 		--set more label.padding_left=0 \
 		--set more label.color=0xffeceff4 \
-		--set more background.color=0xff57627A  \
+		--set more background.color=0x00000000  \
 		--set more background.height=21 \
 		--set more background.padding_left=7 \
 		--set more update_freq=1 \
@@ -150,34 +135,6 @@
 		--set more script="~/.config/sketchybar/plugins/space.sh" \
 		--set more label.font="Rajdhani:Bold:16.0" \
         --subscribe more window_focus front_app_switched space_change title_change\
-		# --set more label="more" \
-
-	# # WINDOW TITLE
-	# sketchybar -m --add item title left \
-	# 	--set title icon= \
-	# 	--set title label.padding_left=9 \
-	# 	--set title background.color=0xff57627A  \
-	# 	--set title background.height=21 \
-	# 	--set title background.padding_left=7 \
-	# 	--set title script="~/.config/sketchybar/plugins/window_title.sh" \
-	# 	--set title update_freq=0 \
-	# 	--set title label.font="Rajdhani:Bold:16.0" \
-	# 	--subscribe title window_focus front_app_switched space_change title_change
-
-	# APP list
-		# --set applist icon= \
-		# --set applist label.padding_left=9 \
-		# --set applist background.padding_left=7 \
-		# --set applist background.color=0xff57627A  \
-	# sketchybar -m --add item applist center \
-	# 	--set applist associated_display=1 \
-	# 	--set applist background.height=21 \
-	# 	--set applist label.padding_left=0 \
-	# 	--set applist background.padding_left=0 \
-	# 	--set applist script="~/.config/sketchybar/plugins/applist.sh" \
-	# 	--set applist update_freq=1 \
-	# 	--set applist label.font="Rajdhani:Regular:16.0" \
-	# 	--subscribe applist window_focus front_app_switched space_change title_change
 
 
 ############## ITEM DEFAULTS ###############
@@ -188,63 +145,99 @@
 		label.padding_right=6
 
 ############## RIGHT ITEMS ##############
-	# # DATE TIME
-	# sketchybar -m --add item date_time right \
-	# 	--set date_time icon= \
-	# 	--set date_time icon.padding_left=8 \
-	# 	--set date_time icon.padding_right=0 \
-	# 	--set date_time label.padding_right=9 \
-	# 	--set date_time label.padding_left=6 \
-	# 	--set date_time label.color=0xffeceff4 \
-	# 	--set date_time update_freq=20 \
-	# 	--set date_time background.color=0x0057627A \
-	# 	--set date_time background.height=21 \
-	# 	--set date_time background.padding_right=12 \
-	# 	--set date_time script="~/.config/sketchybar/plugins/date_time.sh" \
+   # show dock
+	sketchybar -m --add item showdock right \
+        --set showdock icon= \
+		--set showdock icon.padding_left=4 \
+		--set showdock icon.padding_right=0 \
+		--set showdock label='dock' \
+		--set showdock update_freq=1 \
+        --set showdock script=""\
+        --set showdock click_script="~/.config/sketchybar/plugins/dock.sh click"\
+        # --subscribe showdock mouse.clicked mouse.exited mouse.entered mouse.exited.global   \
+        # --set showdock script="~/.config/sketchybar/plugins/showdesktop.sh"\
+
+   # show desktop
+	sketchybar -m --add item showdesktop right \
+        --set showdesktop icon= \
+		--set showdesktop icon.padding_left=4 \
+		--set showdesktop icon.padding_right=0 \
+		--set showdesktop label='desktop' \
+		--set showdesktop update_freq=1 \
+        --set showdesktop script=""\
+        --set showdesktop click_script="osascript -e 'tell application \"System Events\" to keystroke \"d\" using {control down, option down, command down}'"\
+        # --subscribe showdesktop mouse.clicked mouse.exited mouse.entered mouse.exited.global   \
+        # --set showdesktop script="~/.config/sketchybar/plugins/showdesktop.sh"\
+
+   # show launchpad
+	sketchybar -m --add item launchpad right \
+        --set launchpad icon= \
+		--set launchpad icon.padding_left=4 \
+		--set launchpad icon.padding_right=0 \
+		--set launchpad update_freq=10000 \
+		--set launchpad label='launchpad' \
+        --set launchpad script=""\
+        --set launchpad click_script="osascript -e 'tell app \"LaunchPad\" to launch'"\
+
+    # screen saver
+	sketchybar -m --add item screensaver right \
+        --set screensaver icon=冷 \
+		--set screensaver icon.padding_left=4 \
+		--set screensaver icon.padding_right=0 \
+		--set screensaver update_freq=10000 \
+		--set screensaver label='screensaver' \
+        --set screensaver script=""\
+        --set screensaver click_script="osascript -e 'tell application \"System Events\" to keystroke \"s\" using {control down, command down,option down} '"\
+
+    # logout
+	sketchybar -m --add item logout right \
+        --set logout icon=﫼 \
+		--set logout icon.padding_left=4 \
+		--set logout icon.padding_right=0 \
+		--set logout update_freq=10000 \
+		--set logout label='logout' \
+        --set logout script=""\
+        --set logout click_script="~/.config/sketchybar/plugins/logout.sh click"\
+
+    # open windows
+	sketchybar -m --add item openwin11 right \
+        --set openwin11 icon= \
+		--set openwin11 icon.padding_left=4 \
+		--set openwin11 icon.padding_right=0 \
+		--set openwin11 label='Win11' \
+		--set openwin11 update_freq=100 \
+        --set openwin11 script="~/.config/sketchybar/plugins/openwin11.sh"\
+        --set openwin11 click_script="~/.config/sketchybar/plugins/openwin11.sh click"\
+
+	# caffeinate from https://github.com/FelixKratz/SketchyBar/discussions/12?sort=new#discussioncomment-1222059
+	sketchybar -m --add item caffeinate right \
+		--set caffeinate icon.padding_left=4 \
+		--set caffeinate icon.padding_right=0 \
+		--set caffeinate update_freq=100 \
+        --set caffeinate script="~/.config/sketchybar/plugins/caffeinate.sh"\
+        --set caffeinate click_script="~/.config/sketchybar/plugins/caffeinate.sh click"
 
 	# MIC STATUS
 	sketchybar -m --add item mic right \
-		--set mic icon.padding_left=8 \
-		--set mic icon.padding_right=8 \
+		--set mic icon.padding_left=4 \
+		--set mic icon.padding_right=4 \
 		--set mic label.padding_right=0 \
 		--set mic label.padding_left=0 \
 		--set mic label.color=0xffeceff4 \
 		--set mic update_freq=3 \
 		--set mic script="~/.config/sketchybar/plugins/mic.sh" \
-		--set mic click_script="~/.config/sketchybar/plugins/mic_click.sh"
-
-    # Volume
-    # sketchybar -m --add item     volume right                                               \
-    #           --set volume   script="~/.config/sketchybar/plugins/volume.sh"            \
-    #                          update_freq=1                                              \
-    #                          label.padding_right=15                                     \
-    #                          label.padding_left=10                                      \
-    #                          icon.padding_left=8                                        \
-    #                          lazy=off
-
-    # Input source from https://github.com/FelixKratz/SketchyBar/discussions/12#discussioncomment-2202538
-    # sketchybar --add event input_change 'AppleSelectedInputSourcesChangedNotification' \
-    #     --add item input right\
-    #     --set input script="~/.config/sketchybar/plugins/input.sh" \
-    #     --subscribe input input_change
+		--set mic click_script="~/.config/sketchybar/plugins/mic.sh click"
 
     # MAIL
-    sketchybar --add   item          mailIndicator right                   \
-        --set   mailIndicator update_freq=30                        \
-                              script="~/.config/sketchybar/plugins/mail.sh" \
-                              icon.font="Hack Nerd Font:Bold:16.0"           \
-                              icon=􀍜
-                              label.padding_right=8                 \
-	                          label.font="Rajdhani:Bold:16.0" \
-                              background.padding_right=0            \
-                              label=!
+    sketchybar -m --add item mail right \
+        --set mail update_freq=60 \
+        --set mail icon=􀍜 \
+        --set mail label.padding_right=8 \
+        --set mail background.padding_right=0            \
+        --set mail label="!" \
+        --set mail script="~/.config/sketchybar/plugins/mail.sh" \
+        --set mail click_script="~/.config/sketchybar/plugins/mail.sh click" \
 
-
-    # Battery
-    # sketchybar -m --add item battery right \
-    #     --set battery update_freq=60 \
-    #     --set battery script="~/.config/sketchybar/plugins/power.sh" \
-    #     --set battery icon=
 
 ############## FINALIZING THE SETUP ##############
 sketchybar -m --update
