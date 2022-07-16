@@ -66,7 +66,7 @@ yabai -m space 10 --label ten
 
 # space rules
 yabai -m rule --add app="(Code|iTerm)" space=^code
-yabai -m rule --add app="^(Mail|Finder|Safari|Google Chrome)$" space=^web
+yabai -m rule --add app="^(Finder|Safari|Google Chrome)$" space=^web
 yabai -m rule --add app="^(Zotero|PDF Expert)$" space=^research
 yabai -m rule --add app="^(Microsoft PowerPoint|Microsoft Excel)$" space=^office manage=off
 yabai -m rule --add app="^(QQ|WeChat|QQ音乐|优酷)$" space=^enjoy manage=off
@@ -81,10 +81,13 @@ done
 # S K E T C H Y B A R  E V E N T S
 yabai -m signal --add event=window_focused action="sketchybar -m --trigger window_focus &> /dev/null"
 yabai -m signal --add event=window_title_changed action="sketchybar -m --trigger title_change &> /dev/null"
+yabai -m signal --add event=display_changed action="sketchybar -m --trigger display_change"
 # yabai signals
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=space_changed action="landscape"
+yabai -m signal --add event=display_added action="brew services restart sketchybar"
+yabai -m signal --add event=display_removed action="brew services restart sketchybar"
 
 echo "yabai configuration loaded.."
 

@@ -6,7 +6,7 @@ MAIL_OPEN=􀍜
 COUNT=0
 case "$1" in
   "click") 
-        osascript -e 'tell application "Mail" to launch'
+        osascript -e 'tell application "Mail" to activate' 
         # osascript -e 'display notification "'"$SENDER"'" with title "caffeinate" subtitle "切换"'
     ;;
     *)
@@ -18,7 +18,10 @@ case "$1" in
             sketchybar --set $NAME label="$COUNT" icon=$MAIL_OPEN
           fi
         else
-          sketchybar --set $NAME label="!" icon=$MAIL
+            osascript -e 'tell application "Mail" to launch' \
+            -e 'tell application "System Events" to set visible of process "Mail" to false'
+            ~/.config/sketchybar/plugins/mail.sh
+        #   sketchybar --set $NAME label="!" icon=$MAIL
         fi
     ;;
 esac
