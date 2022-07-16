@@ -1,5 +1,5 @@
 ############## BAR ##############
-sketchybar -m --bar \
+sketchybar --bar \
     height=30 \
     position=bottom \
     padding_left=0 \
@@ -9,22 +9,27 @@ sketchybar -m --bar \
     topmost=off
 
 ############## GLOBAL DEFAULTS ##############
-sketchybar -m --default \
-    updates=when_shown \
+    # cache_scripts=on \
+    # updates=when_shown \
+sketchybar --default \
     drawing=on \
-    cache_scripts=on \
     icon.font="Hack Nerd Font:Bold:16.0" \
     icon.color=0xffffffff \
     label.font="Rajdhani:SemiBold:16.0" \
     label.color=0xffeceff4 \
-    label.highlight_color=0xff8CABC8
+    label.highlight_color=0xff8CABC8\
+    # label.drawing=off
 
 ############## SPACE DEFAULTS ##############
-sketchybar -m --default \
-    label.padding_left=5 \
+sketchybar --default \
+    label.padding_left=0 \
     label.padding_right=2 \
-    icon.padding_left=8 \
-    label.padding_right=5
+    icon.padding_left=0 \
+    label.padding_right=2 \
+    label.color=0xffeceff4 \
+    background.color=0x00000000  \
+    background.height=21 \
+    background.padding_left=5 \
 
 
 SPACE_NAMES=(code web research office enjoy more seven eight nine ten)
@@ -32,176 +37,126 @@ SPACE_NAMES=(code web research office enjoy more seven eight nine ten)
 for i in {1..6}
 do
     SPNAME=${SPACE_NAMES[$i-1]}
-    sketchybar  -m --add space $SPNAME left \
+    sketchybar --add space $SPNAME left \
                 --set $SPNAME associated_display=1 \
                     associated_space=$i \
-                    icon.padding_left=0 \
-                    icon.padding_right=2 \
-                    label.padding_right=2 \
-                    label.padding_left=0 \
-                    label.color=0xffeceff4 \
-                    background.color=0x00000000  \
-                    background.height=21 \
-                    background.padding_left=5 \
-                    update_freq=1 \
-                    click_script="yabai -m space --focus $i" \
                     script="~/.config/sketchybar/plugins/space.sh" \
-                --subscribe code window_focus front_app_switched space_change title_change display_change
+                    click_script="yabai -m space --focus $i" \
+                --subscribe $SPNAME window_focus front_app_switched space_change title_change display_change
 done
-	# SPACE x: detect the second monitor
-	# sketchybar -m --add space detect_monitor left \
-	# 	--set detect_monitor associated_display=1 \
-	# 	--set detect_monitor update_freq=1 \
-	# 	--set detect_monitor script="~/.config/sketchybar/plugins/space_on_display2.sh" \
-    #     --subscribe detect_monitor window_focus front_app_switched space_change title_change\
 
+
+############## second DISPLAY SPACES ##############
 MORE_DISPLAYS=$(yabai -m query --displays |  jq '.[1:]' | jq '.[].index')
 for did in ${MORE_DISPLAYS[@]}
 do
     # SPACE 7+: OTHER ICON
     SPACE_IDS=$(yabai -m query --displays --display $did | jq '.spaces' |jq -r '.[]')
-    # SPACE_IDS=(7 8)
     for sid in ${SPACE_IDS[@]}
     do
         EXIST_BARS=$(sketchybar --query bar |jq '.items' | jq -r '.[]')
         SPNAME=${SPACE_NAMES[$sid-1]}
         if [[ ! "${EXIST_BARS[@]}"  =~ "$SPNAME" ]]
         then
-            sketchybar  -m --add space $SPNAME left \
+            sketchybar --add space $SPNAME left \
                         --set $SPNAME associated_display=$did \
                             associated_space=$sid \
-                            icon.padding_left=0 \
-                            icon.padding_right=2 \
-                            label.padding_right=2 \
-                            label.padding_left=0 \
-                            label.color=0xffeceff4 \
-                            background.color=0x00000000  \
-                            background.height=21 \
-                            background.padding_left=5 \
-                            update_freq=1 \
+                            script="~/.config/sketchybar/plugins/space2.sh" \
                             click_script="yabai -m space --focus $sid" \
-                            script="~/.config/sketchybar/plugins/space.sh" \
-                        --subscribe code window_focus front_app_switched space_change title_change display_change
+                        --subscribe $SPNAME window_focus front_app_switched space_change title_change display_change
         fi
     done
 done
 
 
 ############## ITEM DEFAULTS ###############
-	sketchybar -m --default \
-		label.padding_left=2 \
-		icon.padding_right=2 \
-		icon.padding_left=6 \
-		label.padding_right=6
+sketchybar --default \
+    label.padding_left=2 \
+    label.padding_right=6
+    icon.padding_right=0 \
+    icon.padding_left=4 \
 
 ############## RIGHT ITEMS ##############
-   # show dock
-	sketchybar -m --add item showdock right \
-        --set showdock icon= \
-		--set showdock icon.padding_left=4 \
-		--set showdock icon.padding_right=0 \
-		--set showdock label='dock' \
-		--set showdock update_freq=1 \
-        --set showdock script=""\
-        --set showdock click_script="~/.config/sketchybar/plugins/dock.sh click"\
-        # --subscribe showdock mouse.clicked mouse.exited mouse.entered mouse.exited.global   \
-        # --set showdock script="~/.config/sketchybar/plugins/showdesktop.sh"\
+# show dock
+sketchybar --add item showdock right \
+            --set showdock icon= \
+                           label='dock' \
+                           update_freq=10000 \
+                           script=""\
+                           click_script="~/.config/sketchybar/plugins/dock.sh click"\
 
-   # show desktop
-	sketchybar -m --add item showdesktop right \
-        --set showdesktop icon= \
-		--set showdesktop icon.padding_left=4 \
-		--set showdesktop icon.padding_right=0 \
-		--set showdesktop label='desktop' \
-		--set showdesktop update_freq=1 \
-        --set showdesktop script=""\
-        --set showdesktop click_script="osascript -e 'tell application \"System Events\" to keystroke \"d\" using {control down, option down, command down}'"\
-        # --subscribe showdesktop mouse.clicked mouse.exited mouse.entered mouse.exited.global   \
-        # --set showdesktop script="~/.config/sketchybar/plugins/showdesktop.sh"\
+# show desktop
+sketchybar --add item showdesktop right \
+            --set showdesktop icon= \
+                              label='desktop' \
+                              update_freq=10000 \
+                              script=""\
+                              click_script="osascript -e 'tell application \"System Events\" to keystroke \"d\" using {control down, option down, command down}'"\
 
-   # show launchpad
-	sketchybar -m --add item launchpad right \
-        --set launchpad icon= \
-		--set launchpad icon.padding_left=4 \
-		--set launchpad icon.padding_right=0 \
-		--set launchpad update_freq=10000 \
-		--set launchpad label='launchpad' \
-        --set launchpad script=""\
-        --set launchpad click_script="osascript -e 'tell app \"LaunchPad\" to launch'"\
+# show launchpad
+sketchybar --add item launchpad right \
+            --set launchpad icon= \
+                            update_freq=10000 \
+                            label='launchpad' \
+                            script=""\
+                            click_script="osascript -e 'tell app \"LaunchPad\" to launch'"\
 
-    # screen saver
-	sketchybar -m --add item screensaver right \
-        --set screensaver icon=冷 \
-		--set screensaver icon.padding_left=4 \
-		--set screensaver icon.padding_right=0 \
-		--set screensaver update_freq=10000 \
-		--set screensaver label='screensaver' \
-        --set screensaver script=""\
-        --set screensaver click_script="osascript -e 'tell application \"System Events\" to keystroke \"s\" using {control down, command down,option down} '"\
+# screen saver
+sketchybar --add item screensaver right \
+            --set screensaver icon=冷 \
+                              update_freq=10000 \
+                              label='screensaver' \
+                              script=""\
+                              click_script="osascript -e 'tell application \"System Events\" to keystroke \"s\" using {control down, command down,option down} '"\
 
-    # display & monitor settings
-	sketchybar -m --add item monitorsettings right \
-        --set monitorsettings icon= \
-		--set monitorsettings icon.padding_left=4 \
-		--set monitorsettings icon.padding_right=0 \
-		--set monitorsettings update_freq=10000 \
-		--set monitorsettings label='display' \
-        --set monitorsettings script=""\
-        --set monitorsettings click_script="osascript -e 'tell application \"System Preferences\" to activate' -e 'tell application \"System Preferences\" to set current pane to pane \"com.apple.preference.displays\"'"\
+# display & monitor settings
+sketchybar --add item monitorsettings right \
+            --set monitorsettings icon= \
+                                  update_freq=10000 \
+                                  label='display' \
+                                  script=""\
+                                  click_script="osascript -e 'tell application \"System Preferences\" to activate' -e 'tell application \"System Preferences\" to set current pane to pane \"com.apple.preference.displays\"'"\
 
 
-    # logout
-	sketchybar -m --add item logout right \
-        --set logout icon=﫼 \
-		--set logout icon.padding_left=4 \
-		--set logout icon.padding_right=0 \
-		--set logout update_freq=10000 \
-		--set logout label='logout' \
-        --set logout script=""\
-        --set logout click_script="~/.config/sketchybar/plugins/logout.sh click"\
+# logout
+sketchybar --add item logout right \
+            --set logout icon=﫼 \
+                         update_freq=10000 \
+                         label='logout' \
+                         script=""\
+                         click_script="~/.config/sketchybar/plugins/logout.sh click"\
 
-    # open windows
-	sketchybar -m --add item openwin11 right \
-        --set openwin11 icon= \
-		--set openwin11 icon.padding_left=4 \
-		--set openwin11 icon.padding_right=0 \
-		--set openwin11 label='Win11' \
-		--set openwin11 update_freq=100 \
-        --set openwin11 script="~/.config/sketchybar/plugins/openwin11.sh"\
-        --set openwin11 click_script="~/.config/sketchybar/plugins/openwin11.sh click"\
+# open windows
+sketchybar --add item openwin11 right \
+            --set openwin11 icon= \
+                            label='Win11' \
+                            update_freq=100 \
+                            script="~/.config/sketchybar/plugins/openwin11.sh"\
+                            click_script="~/.config/sketchybar/plugins/openwin11.sh click"\
 
-    # MAIL
-    sketchybar -m --add item mail right \
-        --set mail update_freq=60 \
-        --set mail icon=􀍜 \
-        --set mail label.padding_right=8 \
-        --set mail background.padding_right=0            \
-        --set mail label="!" \
-        --set mail script="~/.config/sketchybar/plugins/mail.sh" \
-        --set mail click_script="~/.config/sketchybar/plugins/mail.sh click" \
+# MAIL
+sketchybar --add item mail right \
+            --set mail update_freq=60 \
+                       icon=􀍜 \
+                       label="!" \
+                       script="~/.config/sketchybar/plugins/mail.sh" \
+                       click_script="~/.config/sketchybar/plugins/mail.sh click" \
 
 
-	# caffeinate from https://github.com/FelixKratz/SketchyBar/discussions/12?sort=new#discussioncomment-1222059
-	sketchybar -m --add item caffeinate right \
-		--set caffeinate icon.padding_left=4 \
-		--set caffeinate icon.padding_right=0 \
-		--set caffeinate update_freq=100 \
-        --set caffeinate script="~/.config/sketchybar/plugins/caffeinate.sh"\
-        --set caffeinate click_script="~/.config/sketchybar/plugins/caffeinate.sh click"
+# caffeinate from https://github.com/FelixKratz/SketchyBar/discussions/12?sort=new#discussioncomment-1222059
+sketchybar --add item caffeinate right \
+            --set caffeinate update_freq=10000 \
+                             script="~/.config/sketchybar/plugins/caffeinate.sh"\
+                             click_script="~/.config/sketchybar/plugins/caffeinate.sh click"
 
-	# MIC STATUS
-	sketchybar -m --add item mic right \
-		--set mic icon.padding_left=4 \
-		--set mic icon.padding_right=4 \
-		--set mic label.padding_right=0 \
-		--set mic label.padding_left=0 \
-		--set mic label.color=0xffeceff4 \
-		--set mic update_freq=3 \
-		--set mic script="~/.config/sketchybar/plugins/mic.sh" \
-		--set mic click_script="~/.config/sketchybar/plugins/mic.sh click"
+# MIC STATUS
+sketchybar --add item mic right \
+            --set mic update_freq=10000 \
+                      script="~/.config/sketchybar/plugins/mic.sh" \
+                      click_script="~/.config/sketchybar/plugins/mic.sh click"
 
 
 ############## FINALIZING THE SETUP ##############
-sketchybar -m --update
+sketchybar --update
 
 echo "sketchybar configuration loaded.."
